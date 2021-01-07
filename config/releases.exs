@@ -1,10 +1,10 @@
 import Config
 
 config :mini_repo,
-  port: String.to_integer(System.get_env("PORT", "4000")),
+  port: 4000,
   url: System.get_env("MINI_REPO_URL", "http://localhost:4000")
 
-repo_name = String.to_atom(System.get_env("MINI_REPO_REPO_NAME", "test_repo"))
+repo_name = String.to_atom(System.get_env("MINI_REPO_REPO_NAME", "clsa_repo"))
 
 private_key =
   System.get_env("MINI_REPO_PRIVATE_KEY") ||
@@ -15,7 +15,7 @@ public_key =
     File.read!(Path.join([:code.priv_dir(:mini_repo), "test_repo_public.pem"]))
 
 auth_token =
-  System.get_env("MINI_REPO_AUTH_TOKEN") ||
+  System.get_env("MINI_REPO_AUTH_TOKEN", "lD22NLEzSWOPZshqP3bVDIgBcdSYWQxT") ||
     raise """
     Environment variable MINI_REPO_AUTH_TOKEN must be set.
 
@@ -29,9 +29,10 @@ auth_token =
 store = {MiniRepo.Store.Local, root: {:mini_repo, "data"}}
 
 config :mini_repo,
-  auth_token: System.fetch_env!("MINI_REPO_AUTH_TOKEN"),
+  # System.fetch_env!("MINI_REPO_AUTH_TOKEN"),
+  auth_token: "lD22NLEzSWOPZshqP3bVDIgBcdSYWQxT",
   repositories: [
-    "#{repo_name}": [
+    clsa_repo: [
       private_key: private_key,
       public_key: public_key,
       store: store
@@ -40,6 +41,15 @@ config :mini_repo,
       store: store,
       upstream_name: "hexpm",
       upstream_url: "https://repo.hex.pm",
+
+      # only mirror following packages
+      only:
+        File.read!("packages.txt")
+        |> String.split("\n", trim: true)
+        |> Enum.map(fn x -> String.trim(x) |> String.replace(~r/[^\w+]/, "") end),
+      # 5min
+      sync_interval: 5 * 60 * 1000,
+      sync_opts: [max_concurrency: 1, timeout: :infinity],
 
       # https://hex.pm/docs/public_keys
       upstream_public_key: """
@@ -52,12 +62,6 @@ config :mini_repo,
       J1i2xWFndWa6nfFnRxZmCStCOZWYYPlaxr+FZceFbpMwzTNs4g3d4tLNUcbKAIH4
       0wIDAQAB
       -----END PUBLIC KEY-----
-      """,
-
-      # only mirror following packages
-      only: ~w(decimal),
-
-      # 5min
-      sync_interval: 5 * 60 * 1000
+      """
     ]
   ]

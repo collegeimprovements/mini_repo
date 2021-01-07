@@ -1,0 +1,8 @@
+nimble_options
+nimble_pool
+nimble_parsec
+dataloader
+decimal
+expreso
+absinthe
+telemetry

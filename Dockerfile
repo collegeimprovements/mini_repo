@@ -1,15 +1,5 @@
-FROM elixir:1.9.1-alpine AS build
+FROM collegeimprovements/elixir-docker-base as build
 
-# install build dependencies
-RUN apk add --update build-base
-
-# prepare build dir
-RUN mkdir /app
-WORKDIR /app
-
-# install hex + rebar
-RUN mix local.hex --force && \
-    mix local.rebar --force
 
 # set build ENV
 ENV MIX_ENV=prod
@@ -17,8 +7,9 @@ ENV MIX_ENV=prod
 # install mix dependencies
 COPY mix.exs mix.lock ./
 COPY config config
-RUN mix deps.get
+RUN mix deps.get --only prod
 RUN mix deps.compile
+
 
 # build project
 COPY priv priv
@@ -26,7 +17,6 @@ COPY lib lib
 RUN mix compile
 
 # build release
-COPY rel rel
 RUN mix release
 
 # prepare release image
@@ -41,4 +31,3 @@ RUN chown -R nobody: /app
 USER nobody
 
 ENV HOME=/app
-CMD ["/app/bin/mini_repo", "start"]
