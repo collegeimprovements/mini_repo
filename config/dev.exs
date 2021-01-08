@@ -43,3 +43,33 @@ config :mini_repo,
       """
     ]
   ]
+
+# ExAWS
+config :ex_aws,
+  json_codec: Jason,
+  access_key_id:
+    System.get_env(
+      "AWS_ACCESS_KEY_ID",
+      "AWS_ACCESS_KEY_ID - Please set the value of this env var"
+    ),
+  secret_access_key:
+    System.get_env(
+      "AWS_SECRET_ACCESS_KEY",
+      "AWS_SECRET_ACCESS_KEY - please set the value of this env var"
+    ),
+  s3: [
+    scheme: "https://",
+    region: "ap-southeast-1",
+    host: "s3-ap-southeast-1.amazonaws.com"
+  ]
+
+config :ex_aws, :retries,
+  max_attempts: 2,
+  base_backoff_in_ms: 10,
+  max_backoff_in_ms: 5000
+
+config :ex_aws, :hackney_opts,
+  proxy: System.get_env("PROXY", nil),
+  follow_redirect: true,
+  ssl_options: [{:versions, [:"tlsv1.2"]}],
+  insecure: true
