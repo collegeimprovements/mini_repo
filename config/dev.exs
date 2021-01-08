@@ -23,7 +23,8 @@ config :mini_repo,
       only:
         File.read!("packages.txt")
         |> String.split("\n", trim: true)
-        |> Enum.map(fn x -> String.trim(x) |> String.replace(~r/[^\w+]/, "") end),
+        |> Enum.map(fn x -> String.trim(x) |> String.replace(~r/[^\w+]/, "") end)
+        |> Enum.uniq(),
 
       # 5min
       sync_interval: 5 * 60 * 1000,
