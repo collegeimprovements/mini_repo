@@ -1,28 +1,30 @@
 # MiniRepo
 
-:warning: MiniRepo is deprecated in favour of an offical self-hosting solution from the Hex team, [`mix hex.registry build`](https://github.com/hexpm/hex/blob/90aa44fa8a1e59f2ae65f490edb984e4d6c853d1/lib/mix/tasks/hex.registry.ex) (available from Hex v0.21+).
+- Main feature of this repo is proxy support behind corporate firewall.
+- It provides easy way to install whitelisted packages.
+- Just mention your package name that you what in your mirror by mentioning it in packages.txt file.
 
 MiniRepo allows self-hosting of Hex packages.
 
 Features:
 
-  * Pluggable storage. MiniRepo ships with following adapters:
+- Pluggable storage. MiniRepo ships with following adapters:
 
-      * Local filesystem
+  - Local filesystem
 
-      * S3
+  - S3
 
-  * Mirroring
+- Mirroring
 
-  * Publishing packages via HTTP API
+- Publishing packages via HTTP API
 
-  * Hosting of multiple repositories and mirrors
+- Hosting of multiple repositories and mirrors
 
-    MiniRepo exposes following URLs for API and repository access:
+  MiniRepo exposes following URLs for API and repository access:
 
-      * http://some_url/api/<repo>
+  - http://some_url/api/<repo>
 
-      * http://some_url/repos/<repo>
+  - http://some_url/repos/<repo>
 
 Learn more about Hex specifications [here](https://github.com/hexpm/specifications).
 
@@ -40,10 +42,10 @@ Start a development server:
 
 By default, the development server is configured with two repositories:
 
-  * `test_repo` is a custom repository
+- `test_repo` is a custom repository
 
-  * `hexpm_mirror` is a mirror of the official Hex.pm repository, configured to only fetch package
-    `decimal`.
+- `hexpm_mirror` is a mirror of the official Hex.pm repository, configured to only fetch package
+  `decimal`.
 
 Both repositories are configured to store files locally. See [`config/dev.exs`](config/dev.exs) for more information.
 
@@ -226,11 +228,11 @@ information on Elixir releases.
 
 See following modules documentation to learn more about given feature:
 
-* [`MiniRepo.Store.Local`](lib/mini_repo/store/local.ex)
+- [`MiniRepo.Store.Local`](lib/mini_repo/store/local.ex)
 
-* [`MiniRepo.Store.S3`](lib/mini_repo/store/s3.ex)
+- [`MiniRepo.Store.S3`](lib/mini_repo/store/s3.ex)
 
-* [`MiniRepo.Mirror`](lib/mini_repo/mirror.ex)
+- [`MiniRepo.Mirror`](lib/mini_repo/mirror.ex)
 
 ## Contributing
 
