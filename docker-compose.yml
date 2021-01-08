@@ -1,11 +1,14 @@
 version: "2"
 services:
-  api-server:
-    image: vhkdlp1673.int.clsa.com:5000/ultra_api:latest
-    container_name: ultra_api
+  minirepo:
+    image: mini_repo:latest
+    container_name: mini_repo
     restart: always
     ports:
       - "4000:4000"
+    volumes:
+      - ./packages.txt:/app/packages.txt
+      - ./data:/app/lib/mini_repo-0.2.0/data
     environment:
       - DB_USERNAME=postgres
       - DB_PASSWORD=mUbIz2vBYVxP7xhlYUGYBjbG
@@ -22,4 +25,4 @@ services:
       - RABBITMQ_REX_EXCHANGE="rex"
       - RABBITMQ_REX_EMAILS_QUEUE="rex.emails"
       - RABBITMQ_REX_MEETINGS_PAGE_EMAILS_QUEUE="rex.meetings_page"
-    command: "sh bin/ultra_api start"
+    command: "sh bin/mini_repo start"

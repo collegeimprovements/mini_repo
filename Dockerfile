@@ -30,4 +30,6 @@ COPY --from=build /app/_build/prod/rel/mini_repo ./
 RUN chown -R nobody: /app
 USER nobody
 
+EXPOSE 4000
+
 ENV HOME=/app
