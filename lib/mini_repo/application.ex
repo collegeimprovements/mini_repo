@@ -12,6 +12,17 @@ defmodule MiniRepo.Application do
     ]
 
     Logger.info("Starting Cowboy with #{inspect(http_options)}")
+    proxy = System.get_env("PROXY")
+
+    case proxy do
+      nil ->
+        :nothing
+
+      _ ->
+        %{host: host, port: port} = proxy |> URI.parse()
+        host = String.to_charlist(host)
+        :httpc.set_options(proxy: {{host, port}, ['localhost']})
+    end
 
     repos = repositories(config)
     regular_repos = for %MiniRepo.Repository{} = repo <- repos, do: repo.name
