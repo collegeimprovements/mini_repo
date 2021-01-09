@@ -1,8 +1,12 @@
 absinthe
+absinthe_conn_test
+absinthe_error_payload
 absinthe_plug
 amqp
 amqp_client
 arrays
+bamboo
+bamboo_smtp
 benchee
 broadway
 broadway_rabbitmq
@@ -42,15 +46,18 @@ expreso
 external_service
 extractable
 faker
+fe
 file_system
 finch
 floki
 fun_land
 fuse
 gen_rmq
+gen_smtp
 gen_stage
 gettext
 goldrush
+grumble
 hackney
 hammox
 html_entities
@@ -63,8 +70,10 @@ joken
 jose
 jsx
 jumper
+kadabra
 keycloak
 lager
+lens
 map_diff
 math
 mentat
@@ -78,6 +87,7 @@ nimble_csv
 nimble_options
 nimble_parsec
 nimble_pool
+nimble_strftime
 norm
 numbers
 oauth2
@@ -86,6 +96,7 @@ ok
 operator
 opus
 ordinal
+parallel_stream
 parse_trans
 phoenix
 phoenix_ecto
@@ -94,6 +105,7 @@ phoenix_live_dashboard
 phoenix_live_reload
 phoenix_live_view
 phoenix_pubsub
+pigeon
 plug
 plug_attack
 plug_cowboy
@@ -104,6 +116,7 @@ quark
 rabbit_common
 rambo
 ranch
+recase
 recon
 redix
 result
@@ -126,5 +139,6 @@ vapor
 wallaby
 web_driver_client
 witchcraft
+wormwood
 yamerl
 yaml_elixir
