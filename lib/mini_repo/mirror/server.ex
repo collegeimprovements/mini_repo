@@ -49,6 +49,18 @@ defmodule MiniRepo.Mirror.Server do
         http_user_agent_fragment: user_agent_fragment()
     }
 
+    mirror =
+      case mirror.only do
+        nil -> mirror
+        _ -> Map.put(mirror, :only, Packages.list())
+      end
+
+    # Logger.info("============PACKAGES==============")
+    # Logger.info(mirror.only |> Enum.intersperse("\n") |> List.to_string())
+    # Logger.info("==================================")
+
+    IO.inspect(mirror.only, label: "PACKAGES:")
+
     with {:ok, names} when is_list(names) <- sync_names(mirror, config),
          {:ok, versions} when is_list(versions) <- sync_versions(mirror, config) do
       versions =

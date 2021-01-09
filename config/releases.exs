@@ -43,11 +43,8 @@ config :mini_repo,
       upstream_url: "https://repo.hex.pm",
 
       # only mirror following packages
-      only:
-        File.read!("packages.txt")
-        |> String.split("\n", trim: true)
-        |> Enum.map(fn x -> String.trim(x) |> String.replace(~r/[^\w+]/, "") end)
-        |> Enum.uniq(),
+      only: Packages.list(),
+
       # 5min
       sync_interval: 5 * 60 * 1000,
       sync_opts: [max_concurrency: 1, timeout: :infinity],

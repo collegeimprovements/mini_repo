@@ -10,19 +10,7 @@ services:
       - ./packages.txt:/app/packages.txt
       - ./data:/app/lib/mini_repo-0.2.0/data
     environment:
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=mUbIz2vBYVxP7xhlYUGYBjbG
-      - DATABASE=ultra_api_prod
-      - DB_HOSTNAME=10.220.41.18
-      - DB_POOL_SIZE=20
-      - DB_PORT=5433
-      - SECRET_KEY_BASE="K84VOnP1u0Imbi3wAjYEXfv4Q+SERZZJvE0S/m5DmY9GW0Qj5Al/Yk0a5Z3LaApO"
-      - RABBITMQ_HOST=10.220.41.18
-      - RABBITMQ_USERNAME=majorjaja_mq_admin
-      - RABBITMQ_PASSWORD=IVfi3gfC4IhkTyqUZ
-      - RABBITMQ_PORT=5672
-      - RABBITMQ_REX_VIRTUAL_HOST="research"
-      - RABBITMQ_REX_EXCHANGE="rex"
-      - RABBITMQ_REX_EMAILS_QUEUE="rex.emails"
-      - RABBITMQ_REX_MEETINGS_PAGE_EMAILS_QUEUE="rex.meetings_page"
+      - PROXY="http://proxy.int.mycompany.com:8080"
+      - MINI_REPO_URL="http://localhost:4000"
+      - MINI_REPO_AUTH_TOKEN="lD22NLEzSWOPZshqP3bVDIgBcdSYWQxT"
     command: "sh bin/mini_repo start"
