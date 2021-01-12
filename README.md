@@ -2,7 +2,7 @@
 
 - Main feature of this repo is proxy support behind corporate firewall.
 - It provides easy way to install whitelisted packages.
-- Just mention your package name that you what in your mirror by mentioning it in packages.txt file.
+- Just mention your package name that you want in your mirror by mentioning it in packages.txt file.
 
 MiniRepo allows self-hosting of Hex packages.
 
