@@ -1,7 +1,7 @@
 version: "2"
 services:
   minirepo:
-    image: mini_repo:latest
+    image: collegeimprovements/mini_repo:latest
     container_name: mini_repo
     restart: always
     ports:
