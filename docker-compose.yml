@@ -10,7 +10,7 @@ services:
       - ./packages.txt:/app/packages.txt
       - ./data:/app/lib/mini_repo-0.2.0/data
     environment:
-      - PROXY="http://proxy.int.mycompany.com:8080"
+      - PROXY=http://proxy.int.mycompany.com:8080
       - MINI_REPO_URL="http://localhost:4000"
       - MINI_REPO_AUTH_TOKEN="lD22NLEzSWOPZshqP3bVDIgBcdSYWQxT"
     command: "sh bin/mini_repo start"
