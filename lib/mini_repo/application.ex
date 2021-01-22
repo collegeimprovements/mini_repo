@@ -12,10 +12,13 @@ defmodule MiniRepo.Application do
     ]
 
     Logger.info("Starting Cowboy with #{inspect(http_options)}")
-    proxy = System.get_env("PROXY")
+    proxy = System.get_env("PROXY", nil) |> IO.inspect(label: "PROXY")
 
     case proxy do
       nil ->
+        :nothing
+
+      "" ->
         :nothing
 
       _ ->
